@@ -1,13 +1,13 @@
 import type { NextAuthOptions } from 'next-auth'
-import GitHubProvider from 'next-auth/providers/github'
+import DiscordProvider from 'next-auth/providers/discord'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
 export const options: NextAuthOptions = {
     providers: [
-        GitHubProvider({
-            clientId: process.env.GITHUB_ID as string,
-            clientSecret: process.env.GITHUB_SECRET as string,
-        }),
+        DiscordProvider({
+            clientId: process.env.DISCORD_CLIENT_ID ?? "",
+            clientSecret: process.env.DISCORD_CLIENT_SECRET ?? "",            
+          }),
         CredentialsProvider({
             name: "Credentials",
             credentials: {

@@ -4,12 +4,13 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'avatars.githubusercontent.com',
+                hostname: 'cdn.discordapp.com',
                 port: '',
-                pathname: '/u/**',
+                pathname: '/avatars/**',
             },
         ],
     },
 }
 
 module.exports = nextConfig
+
