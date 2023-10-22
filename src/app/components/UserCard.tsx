@@ -1,4 +1,6 @@
 import Image from "next/image"
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
 
 type User = {
     name?: string | null | undefined;
@@ -11,21 +13,19 @@ type Props = {
     pagetype: string,
 }
 
-export default function Card({ user, pagetype }: Props) {
+export default async function  Card({ user, pagetype }: Props) {
+    const cookieStore = cookies()
+    const supabase = createServerComponentClient({ cookies: () => cookieStore })
+    console.log()
 
-    //console.log(user)
+    const { data: countries } = await supabase.from("countries").select();
+    console.log(countries)
 
     const greeting = user?.name ? (
         <div className="flex flex-col items-center p-6 bg-white rounded-lg font-bold text-5xl text-black">
             Hello {user?.name}!
         </div>
     ) : null
-
-    // const emailDisplay = user?.email ? (
-    //     <div className="flex flex-col items-center p-6 bg-white rounded-lg font-bold text-5xl text-black">
-    //         {user?.email}
-    //     </div>
-    // ) : null
 
     const userImage = user?.image ? (
         <Image
